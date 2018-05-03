@@ -123,7 +123,7 @@ namespace Epilepsy
 
             DataSendTimer = new Timer();
 
-            DataSendTimer.Interval = 500;
+            DataSendTimer.Interval = 300;
             DataSendTimer.AutoReset = false;
             DataSendTimer.Elapsed += DataSendTimer_Elapsed;
            // OpenSerialport();
@@ -132,7 +132,14 @@ namespace Epilepsy
         }
 
         private void DataSendTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {           
+        {
+            if (ResendNum < 1)
+            {
+                ResendData(PreReqIndex);
+
+                return;
+            }
+
             isLive = false;
 
             ErrNum = 0;
@@ -2007,6 +2014,19 @@ namespace Epilepsy
                             ReplyCharge(data[2]);
 
                             break;
+
+                        case Type.Reply.REP_FLASHEEGEND:
+
+                            ErrNum = 0;
+                            ResendNum = 0;
+
+                            ReqState = Type.ReqState.SEND_KEEP_LIVE;
+
+                            isLive = true;
+
+                            MessageBox.Show("FLASH EEG 读取完成！");
+
+                            break;
                     }
                 }
                 else
@@ -2514,6 +2534,12 @@ namespace Epilepsy
                         SendReqEEG();
 
                         break;
+
+                    case Type.ReqState.SEND_REQ_FLASHEEG:
+
+                        SendReqFlashEEG();
+
+                        break;
                 }
             }
             else
@@ -2535,6 +2561,23 @@ namespace Epilepsy
                 OpenSerialport();
             }
          
+        }
+
+        private void SendReqFlashEEG()
+        {
+            byte[] data = new byte[5];
+
+            data[0] = 0x01;
+            data[1] = 0x02;
+            data[2] = 0x03;
+            data[3] = 0x04;
+            data[4] = 0x05;
+
+            byte[] senddata = PackData(data, Type.Request.REQ_FLASHEEG);
+
+            RequestData[(int)Type.Request.REQ_FLASHEEG] = senddata;
+
+            SynchroSendData(Type.Request.REQ_FLASHEEG, senddata);
         }
 
         private void checkislive()
@@ -3371,7 +3414,12 @@ namespace Epilepsy
 
         private void Button_Click_33(object sender, RoutedEventArgs e)
         {
-            this.bitmap_ch1.SetRate(2.0f);           
+            //this.bitmap_ch1.SetRate(2.0f);        
+
+            if (CurState == Type.ConnectState.STATE_CONNECT)
+            {
+                ReqState = Type.ReqState.SEND_REQ_FLASHEEG;
+            }
         }
 
         private void Button_Click_34(object sender, RoutedEventArgs e)

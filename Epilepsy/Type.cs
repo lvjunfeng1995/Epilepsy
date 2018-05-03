@@ -13,15 +13,15 @@ namespace Epilepsy
          public const int JOIN_RESPONSIVE = 3;
          public const int ASK_DATA_REQUEST = 8;*/
 
-        public const int  REQUEST_NUM = 6;
+        public const int REQUEST_NUM = 7;
         public const byte REPLY_PRE = 0xFF;
         public const byte ChARGING = 0;
         public const byte DISCHARGING = 1;
 
         public enum ConnectState
         {
-            STATE_DISCONNECT=0,
-            STATE_CONNECT 
+            STATE_DISCONNECT = 0,
+            STATE_CONNECT
         };
 
         public enum Reply
@@ -31,7 +31,10 @@ namespace Epilepsy
             REP_CHARGE,
             REP_EEGDATA,
             REP_RESEND,
-            REP_ALIVE,         
+            REP_ALIVE,
+            REP_WRITE,
+            REP_FLASHEEGEND,
+            REP_READ
         };
 
         public enum Request
@@ -41,14 +44,16 @@ namespace Epilepsy
             REQ_CHARGE,
             REQ_EEGDATA,
             REQ_RESEND,
-            KEEP_LIVE
+            KEEP_LIVE,
+            REQ_FLASHEEG
         };
 
         public enum ReqState
         {
-            SEND_REQ_CONNECT =0,
+            SEND_REQ_CONNECT = 0,
             SEND_KEEP_LIVE,
-            SEND_REQ_EEGDATA
+            SEND_REQ_EEGDATA,
+            SEND_REQ_FLASHEEG
         };
     }
 }
