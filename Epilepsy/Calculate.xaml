@@ -1,0 +1,275 @@
+﻿<UserControl x:Class="Epilepsy.Calculate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+             xmlns:local="clr-namespace:Epilepsy"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="900">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <!--<RowDefinition Height="30"/>-->
+            <!--<RowDefinition Height="30"/>-->
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TabControl Margin="5,0,5,0" >
+            <TabItem Header="Line Length" Width="100">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Line Length On" Margin="6"/>
+                        <TextBlock Text="Short-Time Trend/s"  Height="20" Grid.Row="1" Grid.Column="1"/>
+                        <TextBox x:Name="textBoxShort" Text="0.5" Width="70" Height="20" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Long-Time Trend/s"  Height="20" Grid.Row="1" Grid.Column="3"/>
+                        <TextBox x:Name="textBoxLong" Text="1.5" Width="70" Height="20" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Detection Threshold" Height="20" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox x:Name="textBoxDetect" Text="1" Width="70" Height="20" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left"/>
+
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                        <TextBlock Text="Select EEG Record" Margin="6"/>
+                        <ComboBox Name="Select_EEG_Record" Height="20" Width="250" Margin="50,0,0,0">
+                            <ComboBoxItem IsSelected="True">00000090_record</ComboBoxItem>
+                            <ComboBoxItem>00000101_record</ComboBoxItem>
+                            <ComboBoxItem>00000301_record</ComboBoxItem>
+                            <ComboBoxItem>00000314_record</ComboBoxItem>
+                            <ComboBoxItem>00000488_record</ComboBoxItem>
+                            <!--<ComboBoxItem>00000848_record</ComboBoxItem>-->
+                        </ComboBox>
+                        <Button x:Name="btnLineLength_clear" Content="Clear" Click="Clear_Click"  Height="20" Width="60"  Margin="100,0,5,0"/>
+                        <Button x:Name="btnLineLength_start" Content="Start" Click="BtnLineLengthStart_Click"  Height="20" Width="60" Margin="15,0,5,0"/>
+                    </StackPanel>
+
+                    
+
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                        <Button x:Name="btnLineLength_stop" Content="Stop" Click="Stop_Click" Grid.Row="1" Grid.Column="0" Height="20" Width="60" Margin="10,0,5,0"/>
+                        <Button x:Name="btnLineLength_continue" Content="Continue" Click="Continue_Click" Grid.Row="1" Grid.Column="0" Height="20" Width="60" Margin="10,0,5,0"/>
+                    </StackPanel>
+
+                    <GroupBox x:Name="groupBox1" Header="Detection Features Legend" Grid.Row="0" Grid.Column="1" Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Line Length" Margin="6"/>
+                            <TextBlock Text="EEG data curves" Margin="6" Grid.Row="1" Grid.Column="0"/>
+                            <Ellipse Fill="Red" Width="5" Height="5" Grid.Row="0" Grid.Column="1"/>
+                            <Line Stroke="Green" X1="14" Y1="15" X2="40" Y2="15" Grid.Row="1" Grid.Column="1" StrokeThickness="3"/>
+
+
+
+                        </Grid>
+
+
+
+
+                    </GroupBox>
+
+                </Grid>
+
+
+
+
+            </TabItem>
+            <TabItem Header="Area" Width="100">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Area On" Margin="6"/>
+                        <TextBlock Text="Short-Time Trend/s"  Height="20" Grid.Row="1" Grid.Column="1"/>
+                        <TextBox x:Name="textBoxShortA" Text="0.5" Width="70" Height="20" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Long-Time Trend/s"  Height="20" Grid.Row="1" Grid.Column="3"/>
+                        <TextBox x:Name="textBoxLongA" Text="1.5" Width="70" Height="20" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Detection Threshold" Height="20" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox x:Name="textBoxDetectA" Text="1" Width="70" Height="20" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnArea_clear" Content="Clear" Click="Clear_Click"  Height="20" Width="60" Grid.Column="1"/>
+                        <Button x:Name="btnArea_start" Content="Start" Click="BtnAreaStart_Click"  Height="20" Width="60" Grid.Column="2"/>
+
+
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                        <Button x:Name="btnArea_stop" Content="Stop" Click="Stop_Click" Grid.Row="1" Grid.Column="0" Height="20" Width="60" Margin="10,0,5,0"/>
+                        <Button x:Name="btnArea_continue" Content="Continue" Click="Continue_Click" Grid.Row="1" Grid.Column="0" Height="20" Width="60" Margin="10,0,5,0"/>
+                    </StackPanel>
+
+                    <GroupBox x:Name="groupBox2" Header="Detection Features Legend" Grid.Row="0" Grid.Column="1" Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Area" Margin="6"/>
+                            <TextBlock Text="EEG data curves" Margin="6" Grid.Row="1" Grid.Column="0"/>
+                            <Ellipse Fill="Blue" Width="5" Height="5" Grid.Row="0" Grid.Column="1"/>
+                            <Line Stroke="Green" X1="14" Y1="15" X2="40" Y2="15" Grid.Row="1" Grid.Column="1" StrokeThickness="3"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="BandPass" Width="100">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="BandPass On" Margin="6"/>
+                        <TextBlock Text="Minimum Frequency/Hz"  Height="20" Grid.Row="1" Grid.Column="1"/>
+                        <TextBox x:Name="textBoxMinFre" Text="10" Width="70" Height="20" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Minimum Amplitude(% of Full Scale)"  Height="20" Grid.Row="1" Grid.Column="3"/>
+                        <TextBox x:Name="textBoxMinAmp" Text="10" Width="70" Height="20" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Maximum Frequency/Hz" Height="20" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox x:Name="textBoxMaxFre" Text="70" Width="70" Height="20" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Minimum Duration/s" Height="20" Grid.Row="2" Grid.Column="3"/>
+                        <TextBox x:Name="textMiniDurBp" Text="1" Width="70" Height="20" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnBandPass_clear" Content="Clear" Click="Clear_Click"  Height="20" Width="60" Grid.Column="1"/>
+                        <Button x:Name="btnBandPass_start" Content="Start" Click="BtnBandPassStart_Click"  Height="20" Width="60" Grid.Column="2"/>
+
+
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                        <Button x:Name="btnBandPass_stop" Content="Stop" Click="Stop_Click" Grid.Row="1" Grid.Column="0" Height="20" Width="60" Margin="10,0,5,0"/>
+                        <Button x:Name="btnBandPass_continue" Content="Continue" Click="Continue_Click" Grid.Row="1" Grid.Column="0" Height="20" Width="60" Margin="10,0,5,0"/>
+                    </StackPanel>
+
+                    <GroupBox x:Name="groupBox3" Header="Detection Features Legend" Grid.Row="0" Grid.Column="1" Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="BandPass" Margin="6"/>
+                            <TextBlock Text="EEG data curves" Margin="6" Grid.Row="1" Grid.Column="0"/>
+                            <Ellipse Fill="Yellow" Width="5" Height="5" Grid.Row="0" Grid.Column="1"/>
+                            <Line Stroke="Green" X1="14" Y1="15" X2="40" Y2="15" Grid.Row="1" Grid.Column="1" StrokeThickness="3"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="1">-->
+        <!--<TextBlock Text="Short-Time Trend/s"  Height="20"/>
+            <TextBox x:Name="textBoxShort" Width="50" Height="20" Margin="10,0,0,0"/>-->
+        <!--<TextBlock Text="Long-Time Trend/s" Height="20" Margin="50,0,0,0"/>
+            <TextBox x:Name="textBoxLong" Width="50" Height="20" Margin="10,0,0,0"/>-->
+        <!--<Button x:Name="button1" Content="绘图" Margin="120,5,5,5" Click="button1_Click"/>-->
+
+        <!--</StackPanel>-->
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="2">-->
+        <!--<TextBlock Text="Detection Threshold" Height="20"/>
+            <TextBox x:Name="textBoxDetect" Width="50" Height="20" Margin="5,0,0,0"/>-->
+
+        <!--<Button x:Name="button2" Content="线长计算" Margin="300,5,5,5" Click="button2_Click"/>-->
+        <!--<Button x:Name="button3" Content="面积计算" Margin="5" Click="button3_Click"/>-->
+        <!--</StackPanel>-->
+        <d3:ChartPlotter x:Name="plotter" Grid.Row="3" Margin="5,5,20,5">
+            <!--<d3:Header Content="DataDisplay"/>-->
+            <d3:VerticalAxisTitle Content="Voltage/mV"/>
+            <d3:HorizontalAxisTitle Content="Time/s"/>
+        </d3:ChartPlotter>
+        <Path Data="M1107.2,139.2" Fill="#FFF4F4F5" HorizontalAlignment="Right" Height="1" Margin="0,0,-208.2,9.8" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom" Width="1"/>
+    </Grid>
+</UserControl>
